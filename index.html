@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Vue</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" id="theme">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+    <section>
+        <h2>TIC例会-vue</h2>
+    </section>
+    <section>
+        <section>
+            <h2>什么是vue？</h2>
+        </section>
+        <section>
+            <p>Vue.js (通常简称为 Vue) 是一个用于构建用户界面 (UI) 的渐进式JavaScript 框架</p>
+        </section>
+        <section>
+            <div>它基于标准 HTML、CSS 和 JavaScript 构建，并提供了一套声明式的、组件化的编程模型，帮助你高效地开发用户界面。无论是简单还是复杂的界面，Vue 都可以胜任。</div>
+        </section>
+        <section>
+            <b>vue的核心特性</b><br>
+            <ul>
+                <li>声明式渲染</li>
+                <li>响应性</li>
+            </ul>
+        </section>
+        <section>
+            <h3>vue的官方网站</h3>
+            <a href="https://cn.vuejs.org/" data-ignore target="_blank">https://cn.vuejs.org/</a>
+        </section>
+    </section>
+    <section>
+        <section>
+            <h2>vue的安装</h2>
+        </section>
+        <section>
+            <h4>首先确保你的电脑中安装了Node.js</h4>
+            <ul>
+                <li>使用命令行或终端，运行node -v检查Node.js的版本</li>
+                <li>如果没有安装Node.js，前往<a href="https://nodejs.org/zh-cn" target="_blank">Node官网</a>进行安装</li>
+            </ul>
+        </section>
+        <section>
+            <h4>关于npm</h4>
+            <div>Node.js的安装过程中可以顺带安装npm。</div><div>同样的，你可以通过npm -v检查npm是否安装成功。</div>
+            <div>yarn和pnpm的使用同样是可行的。</div>
+        </section>
+    </section>
+    <section>
+        <section>
+            <h2>vue的初始化</h2>
+        </section>
+        <section>
+            <div>在终端/命令行中运行 npm create vue@latest</div>
+            <b>确保所在的目录是希望创建项目的目录！！！</b>
+        </section>
+        <section>
+            <div>自行选择需要使用的功能，如Typescript等</div>
+            <div>不确定是否需要使用的功能可以直接选择不开启，创建好项目后仍然有办法开启这些功能</div>
+        </section>
+        <section>
+            <div>随后进入项目所在文件夹</div>
+            <div>运行npm install以安装依赖</div>
+            <div>运行npm run dev以启动开发服务器</div>
+        </section>
+        <section>
+            <div>恭喜你运行起来了你的第一个 Vue 项目！</div>
+        </section>
+    </section>
+    <section>
+        <section>
+            <h2>vue基础</h2>
+        </section>
+        <section>
+            <h3>vue单文件的组成</h3>
+            <ul>
+                <li>template：写界面结构（Vue 模板，HTML 风格 + 指令/组件，最终会被编译）</li>
+                <li>script(推荐script setup)：写组件逻辑（状态、方法、生命周期、props/emits，支持 TS）</li>
+                <li>style：写组件样式（可 scoped/模块化，支持 SCSS/LESS）</li>
+            </ul>
+        </section>
+        <section>
+            <ul>
+                <li>使用createApp函数创造应用实例并传入根组件</li>
+                <li>使用.mount挂载应用（放在所有app.use()、app.component() 注册之后；mount 返回根组件实例而不是应用实例。）</li>
+                <li>使用双大括号作为文本插值绑定数据。双大括号会自动对 HTML 转义,避免XSS。</li>
+                <li>若要渲染原始 HTML 则使用 v-html（注意安全）</li>
+                <li>v-bind:(可简写为:):绑定属性</li>
+            </ul>
+        </section>
+        <section>
+            <ul>
+                <li>v-if/v-else-if：条件式渲染</li>
+                <li>v-else:与别的语言中的else作用基本相同</li>
+                <li>v-show：需要频繁切换时更推荐</li>
+                <li>v-for:接收遍历表达式，vue3中优先级低于v-if,不推荐同一元素上同时使用</li>
+                <b>一定要配 :key，且使用稳定唯一值，避免状态错乱与重渲染.</b>
+            </ul>
+        </section>
+        <section>
+            <h3>响应式基础</h3>
+            <ul style="font-size: 35px">
+                <li>ref：可包任何类型，JS 用 .value，模板自动解包.也用于 DOM 引用（onMounted 后访问）。</li>
+                <li>reactive:对象/数组/Map/Set 响应式。整体替换用 Object.assign 或用 ref 包对象。</li>
+                <li>computed 用于派生状态（能算出来就不存）</li>
+            </ul><br>
+            <div>关于二者的选择：</div>
+            <div style="font-size: 35px">想“整体替换一坨数据” → 用 ref 包对象</div>
+            <div style="font-size: 35px">只是改对象内部字段 → 用 reactive</div>
+        </section>
+        <section>
+            <ul>
+                <li>v-on（可简写为@）：监听事件并执行对应javascript</li>
+                <li>v-model:表单输入绑定</li>
+                <li>watch:侦听函数</li>
+                <li>onMounted,onUpdated等:生命周期钩子函数</li>
+            </ul>
+        </section>
+    </section>
+    <section>
+        <section>
+            <h2>vue的拓展</h2>
+        </section>
+        <section>
+            <h3>Vue Router</h3>
+            <div>官网：<a href="https://router.vuejs.org/">https://router.vuejs.org/</a> </div>
+            <div>Vue.js的官方路由，便于使用Vue.js构建单页应用</div>
+        </section>
+        <section>
+            <h3>Vuex</h3>
+            <div>官网：<a href="https://vuex.vuejs.org/">https://vuex.vuejs.org/</a></div>
+            <div>专为 Vue.js 应用程序开发的状态管理模式 + 库。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</div>
+            <div>Pinia</div>
+            <div>官网：<a href="https://pinia.vuejs.org/">https://pinia.vuejs.org/</a></div>
+            <div>Pinia更适合在新项目使用，但是维修旧项目时不乏使用Vuex的情况。二者区别不太大，很容易上手另一个。</div>
+        </section>
+        <section>
+            <h3>Nuxt</h3>
+            <div>官网：<a href="https://nuxt.com/">https://nuxt.com/</a></div>
+            <div>Nuxt 是一个免费的开源框架，它提供了一种直观且可扩展的方式来创建类型安全、高性能和生产级的全栈 Web 应用程序和网站，并结合了Vue.js。</div>
+        </section>
+    </section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>Reveal.initialize({ hash: true });</script>
+</body>
+</html>
